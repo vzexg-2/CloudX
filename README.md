@@ -10,3 +10,7 @@ CloudX is new and still has a error so don't have much expectations about this.
 
 ## To run
 sudo apt-get update; sudo apt-get upgrade; git clone https://github.com/vzexg/CloudX; cr CloudX; sudo python3 CloudX
+
+## Contact
+sunshinexjuhari@protonmail.com
+Whatsapp: +6282122932858
