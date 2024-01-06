@@ -9,7 +9,7 @@ CloudX is new and still has a error so don't have much expectations about this.
 ( My grammar is bad )
 
 ## To run
-sudo apt-get update; sudo apt-get upgrade; git clone https://github.com/vzexg/CloudX; cr CloudX; sudo python3 CloudX
+sudo apt-get update; sudo apt-get upgrade; git clone https://github.com/vzexg/CloudX; cd CloudX; ulimit -n 999999; sudo python3 CloudX
 
 ## Contact
 sunshinexjuhari@protonmail.com
