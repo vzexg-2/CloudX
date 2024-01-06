@@ -13,7 +13,7 @@
 ## What is CloudX?
 CloudX is a DDoS tool that can pass through the https/http, CloudX has a chance of 25% to break ( pass through ) https protocol website, and 75% to pass through the http website protocol!
 
-CloudX has a chance of 2,5% to destroy the https protocol website! here's an example of https website is https://sma1wiradesa.sch.id/
+CloudX has a chance of 1.2% to destroy the https protocol website! here's an example of https website is https://sma1wiradesa.sch.id/
 
 ## What is HTTPS/HTTP?
 Hypertext transfer protocol secure (HTTPS) is the secure version of HTTP, which is the primary protocol used to send data between a web browser and a website. HTTPS is encrypted in order to increase security of data transfer and 
