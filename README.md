@@ -7,3 +7,6 @@ HTTPS itself is a secure version of a protocol, but HTTP is not so website that 
 CloudX is new and still has a error so don't have much expectations about this.
 
 ( My grammar is bad )
+
+## To run
+sudo apt-get update; sudo apt-get upgrade; git clone https://github.com/vzexg/CloudX; cr CloudX; sudo python3 CloudX
