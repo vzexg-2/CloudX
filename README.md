@@ -1,13 +1,13 @@
 # CloudX LOG
-————————————————————
-**Error LN93 ( bytes ):**
+---------------------
+*Error LOG:*
 
-TypeError: a bytes-like object is required, not 'str'
+*TypeError*: a bytes-like object is required, not 'str'
     self._target(*self._args, **self._kwargs)
   File "/home/JCloudX/CloudX/CloudX", line 92, in attack
     s.sendto("GET /%s HTTP/1.1\r\n" % (url), (ip, int(port)))
 
-————————————————————
+----------------------
 
 
 ## What is CloudX?
