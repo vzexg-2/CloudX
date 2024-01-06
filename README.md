@@ -1,13 +1,13 @@
 # CloudX LOG
------------------------
-Error LOG:
+————————————————————
+**Error LN93 ( bytes ):**
 
 TypeError: a bytes-like object is required, not 'str'
     self._target(*self._args, **self._kwargs)
   File "/home/JCloudX/CloudX/CloudX", line 92, in attack
     s.sendto("GET /%s HTTP/1.1\r\n" % (url), (ip, int(port)))
 
------------------------
+————————————————————
 
 
 ## What is CloudX?
@@ -18,8 +18,8 @@ Hypertext transfer protocol secure (HTTPS) is the secure version of HTTP, which 
 
 HTTPS itself is a secure version of a protocol, but HTTP is not so website that still use HTTP protocol has a 55% chance of being attacked by DDoS
 
-## CloudX is trash.
-CloudX is new and still has a error so don't have much expectations about this script.
+## CloudX Is under development.
+CloudX is new and has many error so don't have much expectations about this program.
 
 ( My grammar is bad )
 
