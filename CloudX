@@ -5,6 +5,7 @@ import urllib.request
 import urllib.error
 import random
 
+print("POST Method is currently being fixed and it is error right now, please use GET instead.")
 logo="""
 < =============== >
       CloudX
