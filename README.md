@@ -5,7 +5,7 @@ Hello! my name is sunshine, im 11 years old and i am from Indonesia, still in El
  
 ## Cloud X is a DDoS tool that can break ( pass through ) to the https protocol.
 
-HTTPS itself is a secure version of a protocol, but HTTP is not so website that uses HTTP has a chance of being attacked by DDoS
+HTTPS itself is a secure version of a protocol, but HTTP is not so website that still use HTTP protocol has a 55% chance of being attacked by DDoS
 
 CloudX is new and still has a error so don't have much expectations about this.
 
