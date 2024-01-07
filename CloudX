@@ -57,12 +57,12 @@ method = input("[+] Enter 'GET' as the request method (default: GET): ")
 print("\n")
 type("TARGET:")
 type_with_protocol(url)
-print("\n"
+print("\n")
 type("--------------------------")
 print("\n")
 time.sleep(2.5)
 type("Waiting CloudX to connect... || [METHOD: GET]")
-print("\n"
+print("\n")
 time.sleep(1.5)
 
 if port == "":
