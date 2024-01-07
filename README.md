@@ -13,9 +13,9 @@ Traceback (most recent call last):
     self.run()
   File "/usr/lib/python3.9/threading.py", line 892, in run
     self._target(*self._args, **self._kwargs)
-  File "/home/juharisunshine/CloudX/CloudX", line 109, in flood_url
+  File "/home/JCloudX/CloudX/CloudX", line 109, in flood_url
     user_agent += ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['platform'].items()])
-  File "/home/juharisunshine/CloudX/CloudX", line 109, in <listcomp>
+  File "/home/JcloudX/CloudX/CloudX", line 109, in <listcomp>
     user_agent += ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['platform'].items()])
 KeyError: 'name'
 
