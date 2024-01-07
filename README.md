@@ -21,9 +21,9 @@ KeyError: 'name'
 
 *NLOG:*
 
-Added CloudX1
-Deleted CloudX
-Renamed CloudX1 > CloudX
++ Added CloudX1
++ Deleted CloudX
++ Renamed CloudX1 > CloudX
 
 -----------------------
 
