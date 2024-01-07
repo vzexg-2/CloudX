@@ -8,6 +8,7 @@ import ssl
 import urllib.request
 from urllib.parse import urlparse
 from concurrent.futures import ThreadPoolExecutor  # Added import
+import sys
 
 os.system('clear')
 print("POST Method is currently being fixed and it is error right now, please use GET instead.")
