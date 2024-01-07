@@ -19,8 +19,13 @@ Traceback (most recent call last):
     user_agent += ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['platform'].items()])
 KeyError: 'name'
 
-----------------------
+*NLOG:*
 
+Added CloudX1
+Deleted CloudX
+Renamed CloudX1 > CloudX
+
+-----------------------
 
 ## What is CloudX?
 CloudX is a DDoS tool that can pass through the https/http, CloudX has a chance of 23% to break ( pass through ) https protocol website, and 79% to pass through the http website protocol!
