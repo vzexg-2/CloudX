@@ -20,7 +20,8 @@ print(logo)
 url_stellar = input("[+] Enter a URL for STELLAR attack: ")
 timer_stellar = input("[+] Enter the attack timer for STELLAR (in seconds): ")
 threads_stellar = input("[+] Enter the number of threads for STELLAR: ")
-
+print("")
+print("Additional layer, keep the url same")
 # Variables for existing attack
 url = input("[+] Enter a URL to attack: ")
 ip = input("[+] Enter the target IP address: ")
