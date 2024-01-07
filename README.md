@@ -7,6 +7,18 @@
   File "/home/JCloudX/CloudX/CloudX", line 92, in attack
     s.sendto("GET /%s HTTP/1.1\r\n" % (url), (ip, int(port)))
 
+*Exception in thread Thread-1*:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/threading.py", line 954, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.9/threading.py", line 892, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/juharisunshine/CloudX/CloudX", line 109, in flood_url
+    user_agent += ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['platform'].items()])
+  File "/home/juharisunshine/CloudX/CloudX", line 109, in <listcomp>
+    user_agent += ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['platform'].items()])
+KeyError: 'name'
+
 ----------------------
 
 
