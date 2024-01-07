@@ -69,7 +69,7 @@ if maxThreads < int(numberOfThreads):
     numberOfThreads = int(maxThreads)
 if method == "":
     method = "GET"
-if method == "POST"
+if method == "POST":
     method = "GET"
 
 # Construct attack parameters
