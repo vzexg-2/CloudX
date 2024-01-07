@@ -5,6 +5,7 @@ import os
 import time
 import socket
 import ssl
+import urllib.request
 from urllib.parse import urlparse
 from concurrent.futures import ThreadPoolExecutor  # Added import
 
