@@ -11,7 +11,7 @@
 
 
 ## What is CloudX?
-CloudX is a DDoS tool that can pass through the https/http, CloudX has a chance of 25% to break ( pass through ) https protocol website, and 75% to pass through the http website protocol!
+CloudX is a DDoS tool that can pass through the https/http, CloudX has a chance of 23% to break ( pass through ) https protocol website, and 79% to pass through the http website protocol!
 
 CloudX has a chance of 1.2% to destroy the https protocol website! here's an example of https website is https://sma1wiradesa.sch.id/
 
@@ -20,12 +20,11 @@ Hypertext transfer protocol secure (HTTPS) is the secure version of HTTP, which 
 
 HTTPS itself is a secure version of a protocol, but HTTP is not so website that still use HTTP protocol has a 55% chance of being attacked by DDoS
 
-## CloudX Is under development.
+## CloudX Is under development 
 CloudX is new and has many error so don't have much expectations about this program.
 
-( My grammar is bad )
+To run the script, type:
 
-## To run
 sudo apt-get update; sudo apt-get upgrade; git clone https://github.com/vzexg/CloudX; cd CloudX; ulimit -n 999999; sudo python3 CloudX
 
 ## Contact
