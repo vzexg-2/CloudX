@@ -170,9 +170,11 @@ def worker(requests_per_worker):
         try:
             if method == "GET":
                 response = session.get(url)
+                time.sleep(0.1)
                 print("[*] Worker | Attack Sent! Status Code: %s" % response.status_code)
             else:
                 response = session.post(url)
+                time.sleep(0.1)
                 print("[*] Worker | Attack Sent! Status Code: %s" % response.status_code)
         except requests.RequestException as e:
             print("[*] Worker | Request failed! Error: %s" % str(e))
