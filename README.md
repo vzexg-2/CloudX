@@ -1,36 +1,9 @@
-# CloudX LOG
----------------------
-*Error LOG:*
-
-*TypeError*: a bytes-like object is required, not 'str'
-    self._target(*self._args, **self._kwargs)
-  File "/home/JCloudX/CloudX/CloudX", line 92, in attack
-    s.sendto("GET /%s HTTP/1.1\r\n" % (url), (ip, int(port)))
-
-*Exception in thread Thread-1*:
-Traceback (most recent call last):
-  File "/usr/lib/python3.9/threading.py", line 954, in _bootstrap_inner
-    self.run()
-  File "/usr/lib/python3.9/threading.py", line 892, in run
-    self._target(*self._args, **self._kwargs)
-  File "/home/JCloudX/CloudX/CloudX", line 109, in flood_url
-    user_agent += ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['platform'].items()])
-  File "/home/JcloudX/CloudX/CloudX", line 109, in <listcomp>
-    user_agent += ' '.join([random.choice(v['name']) for k, v in USER_AGENT_PARTS['platform'].items()])
-KeyError: 'name'
-
-*NLOG:*
-
-+ Added CloudX1
-+ Deleted CloudX
-+ Renamed CloudX1 > CloudX
-
------------------------
 
 ## What is CloudX?
-CloudX is a DDoS tool that can pass through the https/http, CloudX has a chance of 24% to break ( pass through ) to the website that uses https protocol, CloudX is only for website that use "https" and not for "http", it can but it will send only 20-50 request. sometimes it can be 1000+ requests
+CloudX is a DDoS tool that can pass through the https/http, CloudX has a chance of 24% to break ( pass through ) to the website that uses https protocol, CloudX is only for website that use "https" and not for "http", it can but it will send only 20-50 request. sometimes it can be 10K requests or maybe higher!
 
-CloudX has a chance of 1% to destroy the https protocol website! here's an example of https website is https://china.cn.com/
+CloudX has a chance of 1% to unstable the target https protocol website! to check if CloudX is really works or not
+https://dstat.cc/l7ssl?id=FDCservers-1
 
 ## What is HTTPS/HTTP?
 HTTPS
